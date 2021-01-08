@@ -7,7 +7,6 @@ const {check, validationResult} = require('express-validator');
 
 const connection = require('../dbConfig');
 
-// TODO: Uncomment to reimplement login check
 router.route('*')
 .get(controller.getAll);
 
