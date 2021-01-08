@@ -22,7 +22,7 @@ exports.getAll = (req, res, next) => {
 exports.getHome = (req, res) => {    
     var categories = [];    
     var pageData = {};
-    connection.query(`SELECT * FROM \`category\` WHERE \`userId\` = ${req.session.userId}`, (err, rows, fields) => {
+    connection.query(`SELECT category.name, type.name FROM \`category\` INNER JOIN type ON category.typeId = type.typeId`, (err, rows, fields) => {
         if (err) console.log(err);
         else {            
             for (var i = 0; i < rows.length; i++) {
