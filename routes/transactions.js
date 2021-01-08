@@ -5,13 +5,16 @@ const {check, validationResult} = require('express-validator');
 
 const connection = require('../dbConfig');
 
-router.get('/', (req, res) =>{    
-    //res.send("this works");    
+router.route('/')
+.get((req, res) =>{    
+       
     res.render('./transactions/transactions');
-});  
+});
 
-router.get('/add', (req,res) => {
+router.route('/add')
+.get((req,res) => {
     res.render("./transactions/add");
 });
+
 
 module.exports = router;
