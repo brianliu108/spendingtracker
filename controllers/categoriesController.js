@@ -22,7 +22,10 @@ exports.getAll = (req, res, next) => {
 exports.getHome = (req, res) => {    
     var categories = [];    
     var pageData = {};
-    connection.query(`SELECT category.name, type.name FROM \`category\` INNER JOIN type ON category.typeId = type.typeId`, (err, rows, fields) => {
+    connection.query(`SELECT category.categoryId, category.userId AS 'categoryUserId', category.name AS 'categoryName', type.name as 'typeName' 
+    FROM type INNER JOIN category ON type.typeId = category.typeId
+    WHERE category.userId = ${req.session.userId}
+    ORDER BY category.name`, (err, rows, fields) => {
         if (err) console.log(err);
         else {            
             for (var i = 0; i < rows.length; i++) {
@@ -32,7 +35,7 @@ exports.getHome = (req, res) => {
         pageData = {
             categories: categories
         }   
-        console.log(categories);
+        console.log(categories);        
         res.render('categories/categories', pageData);
     });        
 }
