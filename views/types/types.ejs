@@ -1,0 +1,27 @@
+<%- include('../layouts/header') %>
+<body>
+    <main>
+        <h1>Types</h1>
+        <a href="/types/add">New Type</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i < types.length; i++){ %>
+                    <tr>
+                        <td><%= types[i].typeId %></td>
+                        <td><%= types[i].name %></td>
+                        <td><a href="/types/delete">Delete</a></td>
+                    </tr>
+                <% } %>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </main>    
+    
+</body>
+<%- include('../layouts/footer') %>

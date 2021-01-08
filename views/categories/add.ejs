@@ -1,0 +1,28 @@
+<%- include('../layouts/header') %>
+<body>
+    <main>
+        <h1>Add New Category</h1>
+        <form action="" method="POST" onsubmit="return true;">
+            <div class="fields-wrapper">
+                <label for="type">Type</label>
+                <select class="formInput" name="type">
+                    <option value="1">income</option>
+                    <option value="2">expense</option>
+                </select>
+                <span class="validationMessage" id="catATypeVal"></span>
+            </div>
+            <div class="fields-wrapper">
+                <label for="categoryName">Name</label>
+                <input class="formInput" type="text" name="categoryName">
+                <span class="validationMessage" id="catANameVal"></span>
+            </div>
+            <div class="fields-wrapper">
+                <input class="submitButton" id="submit" type="submit" value="Submit">
+            </div>
+            
+        </form>
+        
+    </main>
+    
+</body>
+<%- include('../layouts/footer') %>

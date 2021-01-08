@@ -1,0 +1,23 @@
+<%- include('layouts/header') %>
+<%- include('layouts/message') %>
+<body>
+    <main>
+        <h1>Welcome</h1>        
+        <form action="" method="POST" onsubmit="return true">
+            <div class="fields-wrapper">
+                <label for="username">Email</label>
+                <input type="text" name="username">
+                <% if(typeof(errorMsg) != 'undefined'){ %>
+                    <p class="validationMessage" id="loginValidation"><%= errorMsg %></p>
+                <%} %>                
+            </div>
+            <div class="fields-wrapper">
+                <input class="submitButton" id="submit" type="submit" value="Login">
+            </div>
+        </form>
+        
+        <h3>Hint: try the username 'demo'</h3>
+    </main>
+    
+</body>
+<%- include('layouts/footer') %></main>

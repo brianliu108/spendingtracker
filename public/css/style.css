@@ -1,0 +1,100 @@
+body{
+    width: 750px;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: aqua;
+    font-size: 105%;
+}
+
+main{
+    box-shadow: 0 0 10px 1px grey;
+    padding: 1% 4%;
+    border-radius: 10px;
+    background-color: white;
+}
+
+nav ul{
+    list-style-type: none;    
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 120%;
+    padding-left: 0px;
+}
+
+nav ul li{
+    border: 1px solid black;   
+    padding: 1%;
+    display: inline;
+    border-radius: 10px;
+    background-color: white;
+}
+
+nav ul li a{
+    text-decoration: none;
+}
+
+nav ul li a:hover{
+    color: yellowgreen;
+}
+
+.logout{
+    float: right;
+}
+
+.logout a{
+    text-decoration: none;
+}
+
+form{        
+    padding: 1%;
+    display: block;
+    margin: 0 1%;    
+}
+
+.formInput{
+    -ms-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    box-sizing:content-box;
+    -webkit-box-sizing:content-box; 
+
+    display: block;
+    width: 97%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;    
+}
+
+select{
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.submitButton{
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: center;
+    border: 1px solid transparent;
+    padding: 1%;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    font-family: inherit;
+    font-size: 1rem;
+    margin: 2% 0;
+}
+
+.tempMessage{
+    font-weight: bold;
+    font-size: 1.5rem;
+}

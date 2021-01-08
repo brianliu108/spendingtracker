@@ -1,0 +1,25 @@
+<%- include('../layouts/header') %>
+<body>
+    <main>
+        <h1>Categories</h1>
+        <a href="/categories/add">New Category</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i < categories.length; i++){ %>
+                    <tr>
+                        <td></td>
+                    </tr>
+                <% } %>
+                
+            </tbody>
+        </table>
+    </main>    
+    
+</body>
+<%- include('../layouts/footer') %>
