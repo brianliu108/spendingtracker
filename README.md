@@ -1,7 +1,8 @@
 # Spending Tracker
 # By Brian Liu
 
-`dbConfig.js` is in the .gitignore file, so my template for it is as follows:
+In order to protect sensitive information, `dbConfig.js` is in the .gitignore file. 
+My template for it is as follows:
 
 ```const mysql = require('mysql');
 
