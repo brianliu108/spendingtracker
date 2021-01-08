@@ -1,7 +1,7 @@
 # Spending Tracker
 # By Brian Liu
 
-In order to protect my web host, `dbConfig.js` is in the .gitignore file. 
+In order to protect sensitive information, `dbConfig.js` is in the .gitignore file. 
 My template for it is as follows:
 
 ```const mysql = require('mysql');
