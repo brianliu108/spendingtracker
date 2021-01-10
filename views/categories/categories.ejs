@@ -6,14 +6,17 @@
         <table>
             <thead>
                 <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                 </tr>
             </thead>
             <tbody>
                 <% for(var i = 0; i < categories.length; i++){ %>
                     <tr>
-                        <td></td>
+                        <td><%= categories[i].categoryName %></td>
+                        <td><%= categories[i].typeName %></td>
+                        <td><a href="/categories/edit/<%= categories[i].categoryId %>">Edit</a> |
+                            <a href="/categories/delete/<%= categories[i].categoryId %>">Delete</a></td>
                     </tr>
                 <% } %>
                 

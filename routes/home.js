@@ -10,7 +10,7 @@ router.route('/')
 // Login route
 router.route('/login')
 .get(controller.getLogin)
-.post(validator.validateLogin , controller.postLogin);
+.post(validator.validateLogin, controller.postLogin);
 
 // Logout route
 router.route('/logout')

@@ -1,5 +1,6 @@
-const {check, validationResult } = require('express-validator');
-const url = require('url');
+const { validationResult } = require('express-validator');
+const url = require('url'); // Do not delete
+const { threadId } = require('../dbConfig');
 
 const connection = require('../dbConfig');
 
@@ -25,17 +26,16 @@ exports.getHome = (req, res) => {
     connection.query(`SELECT category.categoryId, category.userId AS 'categoryUserId', category.name AS 'categoryName', type.name as 'typeName' 
     FROM type INNER JOIN category ON type.typeId = category.typeId
     WHERE category.userId = ${req.session.userId}
-    ORDER BY category.name`, (err, rows, fields) => {
+    ORDER BY type.name DESC, category.name ASC`, (err, rows, fields) => {
         if (err) console.log(err);
         else {            
             for (var i = 0; i < rows.length; i++) {
                 categories[i] = rows[i];
             }                            
         }
-        pageData = {
-            categories: categories
-        }   
-        console.log(categories);        
+        pageData.categories = categories;                     
+        if(typeof(req.query.message) != 'undefined') pageData.message = req.query.message;
+        
         res.render('categories/categories', pageData);
     });        
 }
@@ -44,15 +44,36 @@ exports.getAdd = (req, res) =>{
     res.render('categories/add');
 }
 
-exports.postAdd = (req,res) => {
-    const errors = validationResult(req);
+exports.getEdit = (req,res) => {
+    res.redirect(url.format({
+            pathname:'/categories',
+            query:{
+                message: 'Fecaltest'        
+            }
+        }))
+}
 
-    if(!errors.isEmpty){
-        console.log(errors.array());
+exports.postAdd = (req,res) => {
+    console.log('postadd executed');
+    const errors = validationResult(req);             
+    if(!errors.isEmpty()){
+        console.log(errors);
+        res.render('categories/add', {errors: errors.array()});
+    }
+    else {
+        connection.query(`INSERT INTO category(typeId, userId, name)
+        VALUES (${req.body.type}, ${req.session.userId}, '${req.body.categoryName}')`, (err, rows, fields) => {            
+            if (err) res.render('categories/categories', {message: 'Error creating new category'});
+            else if(rows.length === 0) throw new Error('empty');
+            else res.redirect(url.format({
+                    pathname:'/categories',
+                    query:{
+                        message: 'success'        
+                    }
+                }))
+        });
+        
     }
 
-    const typeId = req.body.type;
-    const categoryName = req.body.categoryName;
-
-    res.send('fecal');
+    
 }

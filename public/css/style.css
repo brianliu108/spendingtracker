@@ -99,6 +99,14 @@ select{
     font-size: 1.5rem;
 }
 
+table{
+    width: 100%;
+}
+
+footer{
+    padding: 1%;
+}
+
 @media only screen and (max-width: 905px){
     body{
         width: 100%;        

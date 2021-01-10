@@ -3,8 +3,6 @@ const router = express.Router();
 const validator = require('../validators/categoriesValidator');
 const controller = require('../controllers/categoriesController');
 
-const {check, validationResult} = require('express-validator');
-
 const connection = require('../dbConfig');
 
 router.route('*')
@@ -15,7 +13,12 @@ router.route('/')
 
 router.route('/add')
 .get(controller.getAdd)
-.post(validator.validateCategory,
-controller.postAdd);
+.post(validator.validateCategory, controller.postAdd);
+// .post(controller.postAdd, validator.validateCategory);
+
+// router.post('/add',validator.validateCategory,controller.postAdd);
+
+router.route('/Edit/:id')
+.get(controller.getEdit);
 
 module.exports = router;
