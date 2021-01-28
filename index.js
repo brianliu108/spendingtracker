@@ -6,6 +6,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const {format} = require('url');
 
 const app = express();
 
@@ -23,11 +24,25 @@ app.use(session({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+
+// app.use('*', (req, res, next) => {
+//     console.log('executed ' + req.session.isLoggedIn);
+//     if(!req.session.isLoggedIn) res.redirect(format({
+//         pathname:'/login',
+//         query:{
+//             msg: true        
+//         }
+//     })); else next;
+// });
+
+
 // Setup routes
 app.use('/', require('./routes/home'));
 app.use('/categories', require('./routes/categories'));
 app.use('/transactions', require('./routes/transactions'));
 //app.use('/types', require('./routes/types'));
+
 
 const PORT = process.env.PORT || 8080;
 
