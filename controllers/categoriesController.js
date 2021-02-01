@@ -7,7 +7,7 @@ const {
 } = require('../dbConfig');
 const {
     validateCategory
-} = require('../validators/categoriesValidator');
+} = require('../models/validators/categoriesValidator');
 
 const connection = require('../dbConfig');
 

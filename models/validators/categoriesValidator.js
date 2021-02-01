@@ -1,4 +1,4 @@
-const connection = require('../dbConfig');
+const connection = require('../../dbConfig');
 
 exports.validateCategory = (typeValue, categoryNameValue) => {
     let errors = {};

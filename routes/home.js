@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const validator = require('../validators/homeValidator');
+const validator = require('../models/validators/homeValidator');
 const controller = require('../controllers/homeController');
 
 // Index route
