@@ -3,15 +3,15 @@ const router = express.Router();
 
 const {check, validationResult} = require('express-validator');
 
-const connection = require('../dbConfig');
+const connection = require('../database/dbConfig');
 
-router.route('/')
+router.route('/transactions')
 .get((req, res) =>{    
        
     res.render('./transactions/transactions');
 });
 
-router.route('/add')
+router.route('/transactions/add')
 .get((req,res) => {
     res.render("./transactions/add");
 });

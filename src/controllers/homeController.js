@@ -1,6 +1,6 @@
 const {check, validationResult} = require('express-validator');
 
-const connection = require('../dbConfig');
+const connection = require('../database/dbConfig');
 
 exports.getHome = (req, res) =>{    
     if(!req.session.isLoggedIn){

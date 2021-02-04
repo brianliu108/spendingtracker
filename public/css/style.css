@@ -1,61 +1,77 @@
-body{
-    width: 60%;
-    margin: auto;    
-    background-color: aqua;
+.headerArea {
+    background-color: #364291;
+}
+
+body {
+
+    background-color: white;
     font-size: 105%;
 }
 
-main{
-    box-shadow: 0 0 10px 1px grey;
-    padding: 1% 4%;
-    border-radius: 10px;
-    background-color: white;
+main {
+    /* box-shadow: 0 0 10px 1px grey; */
+    padding: 1% 15%;
+    /* border-radius: 10px; */
+    background-color: ;
 }
 
-nav ul{
-    list-style-type: none;    
+footer {
+    width: 60%;
+    margin: 0 auto;
+}
+
+nav {
+    margin: 0 auto;
+    width: 60%;
+    padding-top: 1%;
+    padding-bottom: .5%;
+}
+
+nav ul {
+    list-style-type: none;
     text-decoration: none;
     font-weight: bold;
     font-size: 120%;
     padding-left: 0px;
 }
 
-nav ul li{
-    border: 1px solid black;   
+nav ul li {
+    /* border: 1px solid black;    */
     padding: 1%;
     display: inline;
-    border-radius: 10px;
-    background-color: #364291;
+    /* border-radius: 10px; */
+    /* background-color: #364291; */
 }
 
-nav ul li a{
+nav ul li a {
     text-decoration: none;
-    color: #fff;
+    color: white;
 }
 
-nav ul li a:hover{
+nav ul li a:hover {
     color: yellowgreen;
 }
 
-.logout{
+.logout {
     float: right;
+    color: white;
 }
 
-.logout a{
+.logout a {
     text-decoration: none;
 }
 
-form{        
+form {
     padding: 1%;
     display: block;
-    margin: 0 1%;    
+    margin: 0 1%;
 }
 
-.formInput{
-    -ms-box-sizing:content-box;
-    -moz-box-sizing:content-box;
-    box-sizing:content-box;
-    -webkit-box-sizing:content-box; 
+.formInput {
+    -ms-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
 
     display: block;
     width: 97%;
@@ -69,17 +85,17 @@ form{
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;    
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-select{
+select {
     margin: 0;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
 }
 
-.submitButton{
+.submitButton {
     display: inline-block;
     font-weight: 400;
     text-align: center;
@@ -94,26 +110,27 @@ select{
     margin: 2% 0;
 }
 
-.tempMessage{
+.tempMessage {
     font-weight: bold;
     font-size: 1.5rem;
 }
 
-table{
+table {
     width: 100%;
 }
 
-footer{
-    padding: 1%;
+.clear {
+    float: none;
 }
 
-@media only screen and (max-width: 905px){
-    body{
-        width: 100%;        
+@media only screen and (max-width: 905px) {
+    body {
+        width: 100%;
     }
-    main{
+
+    main {
         box-shadow: none;
-        border-radius:0%;
+        border-radius: 0%;
         background-color: inherit;
     }
 }

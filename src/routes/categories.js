@@ -4,15 +4,15 @@ const validator = require('../models/validators/categoriesValidator');
 const controller = require('../controllers/categoriesController');
 const commonController = require('../controllers/commonController');
 
-const connection = require('../dbConfig');
+const connection = require('../database/dbConfig');
 
 router.route('*')
 .get(commonController.getAll);
 
-router.route('/')
+router.route('/categories')
 .get(controller.getHome);
 
-router.route('/add')
+router.route('/categories/add')
 .get(controller.getAdd)
 .post(controller.postAdd);
 

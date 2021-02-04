@@ -4,12 +4,12 @@ const {
 const url = require('url'); // Do not delete
 const {
     threadId
-} = require('../dbConfig');
+} = require('../database/dbConfig');
 const {
     validateCategory
 } = require('../models/validators/categoriesValidator');
-
-const connection = require('../dbConfig');
+const Category = require('../models/Category');
+const connection = require('../database/dbConfig');
 
 exports.getHome = (req, res) => {
     var categories = [];
@@ -44,14 +44,16 @@ exports.getEdit = (req, res) => {
     }))
 }
 
-exports.postAdd = (req, res) => {
+exports.postAdd = async (req, res) => {
     // Do validations
     let errors = validateCategory(req.body.type, req.body.categoryName);
 
     if (Object.keys(errors).length === 0 && errors.constructor === Object) {
-
+        var category = new Category(req.body.type, req.session.userId, )
         connection.query(`INSERT INTO category(typeId, userId, name)
-        VALUES (${(req.body.type)}, ${(req.session.userId)}, '${(req.body.categoryName)}')`,
+        VALUES (${connection.escape(req.body.type)}, 
+        ${connection.escape(req.session.userId)},
+        '${connection.escape(req.session.userId)}')`,
             (err, rows, fields) => {
                 if (err) res.redirect(url.format({
                     pathname: '/categories',
