@@ -1,9 +1,18 @@
-class Category {
-    constructor(typeId, userId, name) {
-        this.typeId = typeId;
-        this.userId = userId;
-        this.name = name;
-    }
-}
+const mongoose = require('mongoose')
 
-module.exports = Category;
+const CategorySchema = new mongoose.Schema({
+    type: {
+        type: String,
+        required: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    }
+}, {
+    timestamps: true
+})
+
+const Category = mongoose.model('Category', CategorySchema)
+
+module.exports = Category

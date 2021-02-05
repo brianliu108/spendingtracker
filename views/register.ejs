@@ -1,0 +1,33 @@
+<%- include('layouts/header') %>
+<%- include('layouts/message') %>
+<body>
+    <main>
+              
+        <form class="loginForm" action="/register" method="POST" onsubmit="return true">
+            <h1>Register</h1>  
+            <% if(typeof(errors) != 'undefined'){%>
+                <% for (let i = 0; i < errors.length; i++) {%>
+                    <p class="validationMessage" id="loginValidation"><%= errors[i] %></p>                    
+               <% } %>
+                                
+            <%} %>             
+            <div class="fields-wrapper">                
+                <input class="form-control loginInput" id="name" type="name" name="name" placeholder="name" required>                            
+            </div>   
+            <div class="fields-wrapper">                
+                <input class="form-control loginInput" id="email" type="text" name="email" placeholder="email" required>                            
+            </div>
+            <div class="fields-wrapper">                
+                <input class="form-control loginInput" id="password" type="password" name="password" placeholder="password" required>
+            </div>
+            <div class="fields-wrapper">
+                <input class="submitButton btn btn-primary btn-lg btn-block" id="submit" type="submit" value="Register">
+            </div>
+            <a href="/login">Have an account? Login!</a>
+        </form>
+        
+        
+    </main>
+    
+</body>
+<%- include('layouts/footer') %></main>

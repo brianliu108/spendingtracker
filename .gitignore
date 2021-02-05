@@ -108,3 +108,4 @@ dbConfig.js
 .idea/
 
 .vs/
+.env

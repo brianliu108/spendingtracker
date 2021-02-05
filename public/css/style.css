@@ -9,10 +9,11 @@ body {
 }
 
 main {
+    margin: 0 auto;
     /* box-shadow: 0 0 10px 1px grey; */
     padding: 1% 15%;
     /* border-radius: 10px; */
-    background-color: ;
+    background-color: #fff;
 }
 
 footer {
@@ -67,6 +68,16 @@ form {
     margin: 0 1%;
 }
 
+.loginForm {
+    width: 35%;
+    margin: 0 auto;
+    padding: 0%;
+}
+
+.loginInput {
+    margin: 2% 0;
+}
+
 .formInput {
     -ms-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -113,6 +124,7 @@ select {
 .tempMessage {
     font-weight: bold;
     font-size: 1.5rem;
+    color: red;
 }
 
 table {

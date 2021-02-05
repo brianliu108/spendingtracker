@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-const {check, validationResult} = require('express-validator');
-
 const connection = require('../database/dbConfig');
 
 router.route('/transactions')

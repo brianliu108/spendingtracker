@@ -1,6 +1,8 @@
-const {check, validationResult} = require('express-validator');
-
+require('express-session');
 const connection = require('../database/dbConfig');
+const User = require('../models/User');
+const bcrypt = require('bcrypt');
+
 
 exports.getHome = (req, res) =>{    
     if(!req.session.isLoggedIn){
@@ -15,14 +17,13 @@ exports.getIndex = (req, res) => {
     res.redirect('/login');
 }
 
-exports.getLogin = (req,res) => {    
-    res.cookie('showLogout', false);
-    if(!req.session.isLoggedIn){
+exports.getLogin = (req,res) => {        
+    if(!req.session.isLoggedIn){        
         var pageData = {};
         if(req.query.msg) pageData = {tempMessage:'Please login first!'};
         
-        Object.assign(pageData, {showLogout: false})
-        console.log(pageData);
+        Object.assign(pageData, {showLogout: false})        
+        
         res.render('login',pageData);
     }
     else{
@@ -30,31 +31,42 @@ exports.getLogin = (req,res) => {
     }
 }
 
+exports.postLogin = (req,res) => {
+    
+};
+
+exports.getRegister = (req, res) => {
+    res.render('register', {showLogout: false});
+};
+
+exports.postRegister = async (req,res) => {
+    try{        
+        const user = new User(req.body);
+        console.log(user);
+        user.password = await bcrypt.hash(req.body.password, 8);
+        await user.save();
+    }
+    catch (e) {        
+        return res.render('/register', {
+            errors: ['Problem creating an account'],
+            formFields: {
+                name: req.body.name,
+                email: req.body.email                
+            }
+        });
+    }
+    
+
+    res.send('posted');    
+};
+
 exports.getLogout = (req, res) => {
     req.session.isLoggedIn = false;
 
     res.redirect('/login');
 }
 
-exports.postLogin = (req,res) => {
-    const errors = validationResult(req);    
-    
-    if(errors.isEmpty()){        
-        connection.query(`SELECT * FROM \`user\` WHERE \`email\` = '${req.body.username}'` , (err, rows, fields) => {            
-            if (err) res.render('login', {errorMsg: 'Something went wrong. Please try again'});
-            else if(rows.length === 0) {            
-                res.render('login', {errorMsg: `User '${req.body.username}' not found!`});
-            }
-            else {                                
-                req.session.isLoggedIn = true; 
-                req.session.userId = rows[0].userId;
-                                
-                res.redirect('/home');
-            }                                           
-        });
-    }
-    else res.render('login', {errorMsg: 'Username is required'});    
-};
+
 
 
 
