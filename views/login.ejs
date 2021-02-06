@@ -5,6 +5,12 @@
               
         <form class="loginForm" action="" method="POST" onsubmit="return true">
             <h1>Welcome</h1>
+            <% if(typeof(errors) != 'undefined'){%>
+                <% for (let i = 0; i < errors.length; i++) {%>
+                    <p class="validationMessage" id="loginValidation"><%= errors[i] %></p>                    
+               <% } %>
+                                
+            <%} %>  
             <% if(typeof(tempMessage) != 'undefined') {%>    
                 <span class="tempMessage"><%= tempMessage %></span>
             <%}%>    

@@ -32,7 +32,7 @@ exports.getLogin = (req,res) => {
 }
 
 exports.postLogin = (req,res) => {
-    
+    res.send('login posted');
 };
 
 exports.getRegister = (req, res) => {
@@ -57,7 +57,7 @@ exports.postRegister = async (req,res) => {
     }
     
 
-    res.send('posted');    
+    res.redirect('/home');    
 };
 
 exports.getLogout = (req, res) => {

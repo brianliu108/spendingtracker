@@ -12,7 +12,7 @@ router.route('/')
 // Login route
 router.route('/login')
 .get(checkNotAuthenticated, controller.getLogin)
-.post(checkNotAuthenticated, controller.postLogin);
+.post(checkNotAuthenticated, validator.validateLogin ,controller.postLogin);
 
 router.route('/register')
 .get(checkNotAuthenticated, controller.getRegister)

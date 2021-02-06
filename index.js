@@ -8,8 +8,6 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const methodOverride = require('method-override');
-const User = require('./src/models/User')
 
 const app = express();
 
