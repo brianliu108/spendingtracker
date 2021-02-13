@@ -1,18 +1,14 @@
 const express = require("express");
 const router = express.Router();
-
-const connection = require('../database/dbConfig');
+const controller = require('../controllers/transactionsController');
+const { checkAuthenticated, checkNotAuthenticated} = require('../middleware/authentication');
+const validator = require('../models/validators/transactionsValidator');
 
 router.route('/transactions')
-.get((req, res) =>{    
-       
-    res.render('./transactions/transactions');
-});
+.get(checkAuthenticated, controller.getTransactions);
 
 router.route('/transactions/add')
-.get((req,res) => {
-    res.render("./transactions/add");
-});
-
+.get(checkAuthenticated, controller.getAdd)
+.post(checkAuthenticated, validator.validateTransaction,controller.postAdd);
 
 module.exports = router;

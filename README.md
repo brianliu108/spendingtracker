@@ -6,4 +6,4 @@ In order to protect sensitive information, the `.env` is required.
 The variables included are:
 `PORT`,
 `SESSION_SECRET`, and
-`MONGOOSECONNECTION`
+`MONGOOSE_CONNECTION`

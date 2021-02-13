@@ -9,6 +9,10 @@ const { checkAuthenticated, checkNotAuthenticated } = require('../middleware/aut
 router.route('/')
 .get(controller.getIndex);
 
+// Home route
+router.route('/home')
+.get(checkAuthenticated, controller.getHome);
+
 // Login route
 router.route('/login')
 .get(checkNotAuthenticated, controller.getLogin)
@@ -20,10 +24,8 @@ router.route('/register')
 
 // Logout route
 router.route('/logout')
-.get(controller.getLogout);
+.get(checkAuthenticated, controller.getLogout);
 
-// Home route
-router.route('/home')
-.get(controller.getHome);
+
 
 module.exports = router;

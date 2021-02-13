@@ -1,10 +1,4 @@
-var formFields = 0;
-
-function fillFormFields(fields) {    
-    var keys = Object.keys(fields);
-    for (let i = 0; i < fields.length; i++) {
-        document.getElementById(keys[i]).innerHTML = fields[i];        
-    }
+function test(){
+    console.log('test');
+    return false;
 }
-
-fillFormFields(formFields);

@@ -1,4 +1,5 @@
 <%- include('../layouts/header') %>
+
 <body>
     <main>
         <h1>Categories</h1>
@@ -6,19 +7,16 @@
         <table>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Type</th>
+                    <th>Name</th>                    
                 </tr>
             </thead>
             <tbody>
-                <% for(var i = 0; i < categories.length; i++){ %>
+                <% for (let i = 0; i < categories.length; i++) {%>
                     <tr>
-                        <td><%= categories[i].categoryName %></td>
-                        <td><%= categories[i].typeName %></td>
-                        <td><a href="/categories/edit/<%= categories[i].categoryId %>">Edit</a> |
-                            <a href="/categories/delete/<%= categories[i].categoryId %>">Delete</a></td>
-                    </tr>
-                <% } %>
+                        <td><%= categories[i].name %></td>                        
+                        <td><a href="categories/edit/<%= categories[i].name%>">Edit</a> | <a href="categories/delete/<%= categories[i].name%>">Delete</a></td>
+                    </tr>                    
+               <% }  %> 
                 
             </tbody>
         </table>

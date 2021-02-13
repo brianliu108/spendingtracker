@@ -1,41 +1,92 @@
 const url = require('url'); // Do not delete
-const {
-    threadId
-} = require('../database/dbConfig');
-const {
-    validateCategory
-} = require('../models/validators/categoriesValidator');
+const { validateCategory } = require('../models/validators/categoriesValidator');
 const Category = require('../models/Category');
-const connection = require('../database/dbConfig');
 
-exports.getHome = (req, res) => {
-    var categories = [];
-    var pageData = {};
+exports.getCategories = async (req, res) => {
+    var categories = await Category.find({ email: req.session.email }).sort({ name: 1 }).exec();
     
-    res.render('categories/categories', pageData);
-}
+    res.render('categories/categories',{
+        categories: categories
+    });
+};
 
-exports.getAdd = (req, res) => {
+exports.getAdd = (req, res) => { 
     res.render('categories/add');
-}
-
-exports.getEdit = (req, res) => {
-    res.redirect(url.format({
-        pathname: '/categories',
-        query: {
-            message: 'test'
-        }
-    }))
-}
+};
 
 exports.postAdd = async (req, res) => {
-    var errors = {};
+    try{        
+        var category = new Category({
+            email: req.session.email,
+            name: req.body.categoryName
+        });        
+
+        await category.save();
+
+        return res.redirect('/categories');
+    } catch (e) {        
+        return res.render('categories/add', {
+            errors: ['Error adding. Please try again']
+        })
+    }
     
-    res.redirect(url.format({
-        pathname: '/categories',
-        query: {
-            message: 'success'
-        }
-    }))
    
+};
+
+exports.getDelete = async (req, res) => {
+    try{
+        var category = await Category.findOne({
+            email: req.session.email,
+            name: req.params.category
+        }).exec();        
+    } catch {
+        return res.redirect('/categories');
+    }
+    
+    if(category == null) return res.redirect('/categories');
+
+    req.session.categoryDelete = category.name;    
+    return res.render('categories/delete', {
+        category: category
+    });
+};
+
+exports.postDelete = async (req, res) => {
+    try{
+        await Category.deleteOne({email: req.session.email, name: req.session.categoryDelete}).exec();
+    } catch {
+        return res.redirect('/categories');
+    }
+
+    return res.redirect('/categories');
+}
+
+exports.getEdit = async (req, res) => {
+    let category;
+    
+    try{
+        category = await Category.findOne({
+            email: req.session.email,
+            name: req.params.category
+        }).exec();        
+    } catch {
+        return res.redirect('/categories');
+    }
+    
+    if(category == null) return res.redirect('/categories');
+
+    req.session.categoryEdit = req.params.category;      
+    return res.render('categories/edit', {
+        category: category
+    });
+}
+
+exports.postEdit = async (req, res) => {
+    try{
+        await Category.updateOne({email: req.session.email, name: req.session.categoryEdit},{email: req.session.email, name: req.body.categoryName});
+    } catch {
+        return res.redirect('/categories');
+    }
+
+    res.redirect('/categories');
 }

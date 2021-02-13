@@ -1,11 +1,9 @@
-const { render } = require('ejs');
 const validator = require('validator');
 const User = require('../../models/User');
 const bcrypt = require('bcrypt');
 
 exports.validateLogin = async (req,res,next) => {
     var errors = [];
-    var pageData = {};
     var user;
 
     // Validate Email
@@ -38,9 +36,9 @@ exports.validateLogin = async (req,res,next) => {
             } 
             else {
                 // Login Valid
-                req.session.userId = user._id;
+                req.session.email = user.email;
                 req.session.isLoggedIn = true;
-                res.redirect('/home');
+                return next();
             }
         });
     } catch (e) {

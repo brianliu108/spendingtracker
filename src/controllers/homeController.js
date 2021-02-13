@@ -2,15 +2,12 @@ require('express-session');
 const connection = require('../database/dbConfig');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-
+const dayjs = require('dayjs');
 
 exports.getHome = (req, res) =>{    
-    if(!req.session.isLoggedIn){
-        res.redirect('/login');
-    }
-    else{
-        res.render('home');
-    }
+    res.render('home', {
+        date: dayjs().format('MMMM')
+    });
 }
 
 exports.getIndex = (req, res) => {
@@ -32,7 +29,7 @@ exports.getLogin = (req,res) => {
 }
 
 exports.postLogin = (req,res) => {
-    res.send('login posted');
+    res.redirect('home');
 };
 
 exports.getRegister = (req, res) => {

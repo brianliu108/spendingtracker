@@ -1,50 +1,66 @@
 const connection = require('../../database/dbConfig');
+const Category = require('../Category');
 
-exports.validateCategory = async (typeValue, categoryNameValue) => {
-    let errors;
-    // const income = 1;
-    // const expense = 2;
-    // var rows = [];
+exports.validateCategory = async (req, res, next) => {
+    let errors = [];
+    let category;
 
-    // if (!(typeValue == income || typeValue == expense)) errors.type = 'Type wasn\'t found';
-    // if (categoryNameValue == '') errors.categoryName = 'Name is required';    
+    if (req.body.categoryName == '')
+        errors.push('Name is required');
+    else{
+        try {
+            category = await findCategory(req.session.email, req.body.categoryName);
+        } catch {
+            errors.push('Error finding the category');
+        }
+                
+        if (category == null) return next();
+        else errors.push('Category already exists');
+    }
 
-    let resultRows = Array();
-    const result = connection.query(`SELECT * FROM type WHERE typeId = ?`, [connection.escape(typeValue)],
-    async (err, rows, fields) => {
-        async.each(rows, function (row, callback) {
-            connection.query('SELECT * FROM TABLE 2', function (err, innerRow) {
-                resultRows.push(innerRow);
-                callback(null);
-            });
-        }, async function () {
-            //This is the final function which get executed when loop is done.
-            const response = {
-                statusCode: 200,
-                headers: {
-                    "Access-Control-Allow-Origin": "*" // Required for CORS support to work
-                },
-                body: JSON.stringify({
-                    success: true,
-                    data: resultRows
-                })
-            };
-            callback(null, response);
-        });
+    if (errors.length > 0) return res.render('categories/add', {
+        errors: errors
+    });
+}
+
+// exports.validateDelete = async (req, res, next) => {
+//     let errors = []
+
+//     try{
+//         let category = await findCategory(req.session.email, req.params.category);
+
+//         if(category == null) return res.redirect('/categories');
+
+//         next();
+//     } catch {
+
+//     }
+// }
+
+exports.validateEdit = async (req, res, next) => {
+    let errors = [];
+    let category;
+
+    if(req.body.categoryName == '') errors.push('Name is required')
+    
+    if(errors.length > 0) return res.render('categories/edit', {
+        errors: errors,
+        category: {
+            name: req.session.categoryEdit
+        }
     });
 
-    // var query = connection.query(`SELECT * FROM type WHERE typeId = ?`,
-    //     [connection.escape(typeValue)],
-    //     (error, results, fields) => {
-    //         if (error) errors = error;
-    //         else {
-    //             errors = results;
-    //         }
-    //         console.log('escaped: ', connection.escape(typeValue));
-    //         console.log('validateCategory query executed');
-    //     });
+    return next();
 
-    // // console.log('validateCategory finished');
-    // console.log('query:', query);
-    // return errors;
+}
+
+async function findCategory(email, name) {
+    try{
+        var category = await Category.findOne({email: email , name: name}).exec();
+        if(category == null) return;
+
+        else return category;
+    } catch {
+        throw new Error('Error finding category');
+    }
 }

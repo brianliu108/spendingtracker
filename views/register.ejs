@@ -2,8 +2,8 @@
 <%- include('layouts/message') %>
 <body>
     <main>
-              
-        <form class="loginForm" action="/register" method="POST" onsubmit="return true">
+        <script src="js/formFields.js"></script>      
+        <form class="loginForm" action="/register" method="POST" onsubmit="return test();">
             <h1>Register</h1>  
             <% if(typeof(errors) != 'undefined'){%>
                 <% for (let i = 0; i < errors.length; i++) {%>

@@ -2,7 +2,86 @@
 <body>
     <main>
         <h1>Add New Transaction</h1>
-        
-    </main>   
+        <form action="" method="POST" onsubmit="return true;">
+            <% if(typeof(errors) != 'undefined'){%>
+                <% for (let i = 0; i < errors.length; i++) {%>
+                    <p class="validationMessage" id="loginValidation"><%= errors[i] %></p>                    
+               <% } %>
+                                
+            <%} %>              
+            
+            <div class="fields-wrapper btn-group">
+                <input type="radio" class="btn-check" name="transactionType" id="transactionExpense" autocomplete="off" value="expense">
+                <label class="btn btn-outline-primary" for="transactionExpense">Expense</label> 
+
+                <input type="radio" class="btn-check" name="transactionType" id="transactionIncome" autocomplete="off" value="income">
+                <label class="btn btn-outline-primary" for="transactionIncome">Income</label>                         
+            </div> 
+
+            <div class="fields-wrapper">
+                <label for="transactionCategory">Category</label>
+                <a href="/categories/add">+Add new category</a>
+                <select class="formInput" id="transactionCategory" name="transactionCategory">
+                    <% for (let i = 0; i < categories.length; i++) { %>                        
+                        <option value="<%= categories[i].name %>"><%= categories[i].name %></option>
+                    <%} %>
+                </select>                
+            </div>
+
+            <div class="fields-wrapper">
+                <label for="transactionDate">Date</label>
+                <input class="formInput" type="date" id="transactionDate" name="transactionDate">
+            </div>
+
+            <div class="fields-wrapper">
+                <label for="transactionAmount">Amount</label>
+                <input class="formInput" type="text" id="transactionAmount" name="transactionAmount" placeholder="$">
+            </div>
+
+            <div class="fields-wrapper">
+                <label for="transactionNote">Note</label>
+                <!-- <input class="formInput" type="text" id="transactionNote" name="transactionNote"> -->
+                <textarea class="formInput" id="transactionNote" name="transactionNote"></textarea>
+            </div>
+
+            <div class="fields-wrapper form-check">     
+                <label class="form-check-label" for="transactionRecurring">Recurring?</label>           
+                <input class="form-check-input" type="checkbox" id="transactionRecurring" name="transactionRecurring" onclick="transactionRecurring_OnClick()" value="true">                
+            </div>
+
+            <div id="recurringOptions">
+                <div class="fields-wrapper">
+                    <label for="transactionRecurringInterval">Recurring Interval</label>
+                    <select class="formInput" name="transactionRecurringInterval" id="transactionRecurringInterval">
+                        <option value="weekly">Weekly</option>
+                        <option value="biweekly">Bi-Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+
+                <div class="fields-wrapper">
+                    <label for="transactionEndDate">End Date</label>
+                    <input class="formInput" type="date" id="transactionEndDate" name="transactionEndDate" min="javascript:new Date()">
+                </div>
+            </div>
+            
+            <div class="fields-wrapper">
+                <input class="btn btn-primary submitButton" type="submit" value="Submit">
+            </div>
+            
+        </form>
+        <a href="javascript:history.back()">Back</a>
+    </main>
+    <script>
+    if (!document.getElementById('transactionRecurring').checked) document.getElementById('recurringOptions').hidden = true;
+    else document.getElementById('recurringOptions').hidden = false
+
+
+    document.getElementById('transactionDate').valueAsDate = new Date();
+
+    function transactionRecurring_OnClick() {
+        document.getElementById('recurringOptions').hidden = !document.getElementById('recurringOptions').hidden;
+    }
+</script>
 </body>
 <%- include('../layouts/footer') %>

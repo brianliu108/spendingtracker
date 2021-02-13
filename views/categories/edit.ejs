@@ -1,7 +1,7 @@
 <%- include('../layouts/header') %>
 <body>
     <main>
-        <h1>Add New Category</h1>
+        <h1>Edit <%= category.name %></h1>
         <form action="" method="POST" onsubmit="return true;">
             <% if(typeof(errors) != 'undefined'){%>
                 <% for (let i = 0; i < errors.length; i++) {%>
