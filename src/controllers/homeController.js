@@ -1,10 +1,37 @@
 require('express-session');
-const connection = require('../database/dbConfig');
+const Transaction = require('../models/Transaction');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const dayjs = require('dayjs');
+const datefns = require('date-fns');
 
-exports.getHome = (req, res) =>{    
+exports.getHome = async (req, res) =>{   
+    let transactions, duration, offset;
+
+    // Get duration from parameters or set to 'month'
+    switch (typeof(req.params.duration)) {
+        case 'number':
+            duration = req.params.duration;
+            break;   
+        default:
+            duration = 'month'
+            break;
+    }
+    // Get offset parameter or set to 0
+    switch (typeof(req.params.offset)) {
+        case 'number':
+            offset = parseInt(req.params.offset)
+            break;  
+        default:
+            offset = 0;
+            break;
+    }
+
+    try {
+        transactions = await Transaction.find({email: req.session.email})
+    } catch {
+        res.redirect('/');
+    }
+    console.log(transactions);
     res.render('home', {
         date: dayjs().format('MMMM')
     });
@@ -14,14 +41,21 @@ exports.getIndex = (req, res) => {
     res.redirect('/login');
 }
 
-exports.getLogin = (req,res) => {        
+exports.getDemo = (req, res) => {
+    req.session.email = 'demo@demo.com';
+    req.session.isLoggedIn = true;
+
+    res.redirect('/home');
+}
+
+exports.getLogin = (req,res) => {   
     if(!req.session.isLoggedIn){        
         var pageData = {};
-        if(req.query.msg) pageData = {tempMessage:'Please login first!'};
+        if(req.query.msg) pageData = {tempMessage:'Please login first'};
         
         Object.assign(pageData, {showLogout: false})        
         
-        res.render('login',pageData);
+        res.render('login', pageData);
     }
     else{
         res.redirect('/home')
@@ -62,9 +96,3 @@ exports.getLogout = (req, res) => {
 
     res.redirect('/login');
 }
-
-
-
-
-
-

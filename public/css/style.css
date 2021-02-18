@@ -23,7 +23,7 @@ footer {
 
 nav {
     margin: 0 auto;
-    width: 60%;
+    width: 71%;
     padding-top: 1%;
     padding-bottom: .5%;
 }
@@ -65,7 +65,7 @@ nav ul li a:hover {
 .validationMessage {
     color: red;
     font-weight: bold;
-    
+
 }
 
 form {
@@ -139,6 +139,14 @@ select {
 
 table {
     width: 100%;
+}
+
+.income {
+    color: green;
+}
+
+.expense {
+    color: red;
 }
 
 .clear {

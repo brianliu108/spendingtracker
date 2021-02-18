@@ -1,5 +1,5 @@
 const url = require('url'); // Do not delete
-const { validateCategory } = require('../models/validators/categoriesValidator');
+const { validateCategory } = require('../middleware/validators/categoriesValidator');
 const Category = require('../models/Category');
 
 exports.getCategories = async (req, res) => {

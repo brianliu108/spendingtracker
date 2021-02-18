@@ -25,7 +25,7 @@ const TransactionSchema = new mongoose.Schema({
         type: String
     },
     recurring: Boolean,
-    recurringInverval: String,
+    recurringInterval: String,
     endDate: Date
 });
 

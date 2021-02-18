@@ -1,7 +1,7 @@
 <%- include('../layouts/header') %>
 <body>
     <main>
-        <h1>Add New Transaction</h1>
+        <h1>Edit Transaction</h1>
         <form action="" method="POST" onsubmit="return true;">
             <% if(typeof(errors) != 'undefined'){%>
                 <% for (let i = 0; i < errors.length; i++) {%>
@@ -11,10 +11,10 @@
             <%} %>              
             
             <div class="fields-wrapper btn-group">
-                <input type="radio" class="btn-check" name="transactionType" id="transactionExpense" autocomplete="off" value="expense" <% if(typeof(type) != 'undefined' && type == 'e') { %> checked <% } %>>
+                <input type="radio" class="btn-check" name="transactionType" id="transactionExpense" autocomplete="off" value="expense" <% if(transaction.type == 'expense'){%> checked <%}%> >
                 <label class="btn btn-outline-primary" for="transactionExpense">Expense</label> 
 
-                <input type="radio" class="btn-check" name="transactionType" id="transactionIncome" autocomplete="off" value="income" <% if(typeof(type) != 'undefined' && type == 'i') { %> checked <% } %>>
+                <input type="radio" class="btn-check" name="transactionType" id="transactionIncome" autocomplete="off" value="income" <% if(transaction.type == 'income'){%> checked <%}%> >
                 <label class="btn btn-outline-primary" for="transactionIncome">Income</label>                         
             </div> 
 
@@ -23,45 +23,45 @@
                 <a href="/categories/add">+Add new category</a>
                 <select class="formInput" id="transactionCategory" name="transactionCategory">
                     <% for (let i = 0; i < categories.length; i++) { %>                        
-                        <option value="<%= categories[i].name %>"><%= categories[i].name %></option>
+                        <option value="<%= categories[i].name %>" <% if(transaction.categoryName == categories[i].name){%> selected="selected" <%}%> ><%= categories[i].name %></option>
                     <%} %>
                 </select>                
             </div>
 
             <div class="fields-wrapper">
                 <label for="transactionDate">Date</label>
-                <input class="formInput" type="date" id="transactionDate" name="transactionDate">
+                <input class="formInput" type="date" id="transactionDate" name="transactionDate" value="<%= date %>">
             </div>
 
             <div class="fields-wrapper">
                 <label for="transactionAmount">Amount</label>
-                <input class="formInput" type="text" id="transactionAmount" name="transactionAmount" placeholder="$">
+                <input class="formInput" type="text" id="transactionAmount" name="transactionAmount" placeholder="$" value="<%= transaction.amount%>">
             </div>
 
             <div class="fields-wrapper">
-                <label for="transactionNote">Note</label>
-                <!-- <input class="formInput" type="text" id="transactionNote" name="transactionNote"> -->
-                <input class="formInput" id="transactionNote" name="transactionNote">
+                <label for="transactionNote">Note</label>                
+                <input type="text" class="formInput" id="transactionNote" name="transactionNote" value="<%= transaction.note %>">
             </div>
 
             <div class="fields-wrapper form-check">     
                 <label class="form-check-label" for="transactionRecurring">Recurring?</label>           
-                <input class="form-check-input" type="checkbox" id="transactionRecurring" name="transactionRecurring" onclick="transactionRecurring_OnClick()" value="true">                
+                <input class="form-check-input" type="checkbox" id="transactionRecurring" name="transactionRecurring" onclick="transactionRecurring_OnClick()" value="true" 
+                <% if(transaction.recurring){%> checked <%}%>>                
             </div>
 
             <div id="recurringOptions">
                 <div class="fields-wrapper">
                     <label for="transactionRecurringInterval">Recurring Interval</label>
                     <select class="formInput" name="transactionRecurringInterval" id="transactionRecurringInterval">
-                        <option value="weekly">Weekly</option>
-                        <option value="biweekly">Bi-Weekly</option>
-                        <option value="monthly">Monthly</option>
+                        <option value="weekly" <% if(transaction.recurringInterval == 'weekly') { %> selected="selected" <%}%>>Weekly</option>
+                        <option value="biweekly" <% if(transaction.recurringInterval == 'biweekly') { %> selected="selected" <%}%>>Bi-Weekly</option>
+                        <option value="monthly" <% if(transaction.recurringInterval == 'monthly') { %> selected="selected" <%}%>>Monthly</option>
                     </select>
                 </div>
 
                 <div class="fields-wrapper">
                     <label for="transactionEndDate">End Date</label>
-                    <input class="formInput" type="date" id="transactionEndDate" name="transactionEndDate" min="javascript:new Date()">
+                    <input class="formInput" type="date" id="transactionEndDate" name="transactionEndDate" min="javascript:new Date()" value="<%= endDate %>">
                 </div>
             </div>
             
@@ -76,10 +76,7 @@
 </body>
 <script>
     if (!document.getElementById('transactionRecurring').checked) document.getElementById('recurringOptions').hidden = true;
-    else document.getElementById('recurringOptions').hidden = false
-
-
-    document.getElementById('transactionDate').valueAsDate = new Date();
+    else document.getElementById('recurringOptions').hidden = false    
 
     function transactionRecurring_OnClick() {
         document.getElementById('recurringOptions').hidden = !document.getElementById('recurringOptions').hidden;

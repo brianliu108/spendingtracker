@@ -3,7 +3,7 @@
 <body>
     <main>
         <script src="js/formFields.js"></script>      
-        <form class="loginForm" action="/register" method="POST" onsubmit="return test();">
+        <form class="loginForm" action="/register" method="POST" onsubmit="return true;">
             <h1>Register</h1>  
             <% if(typeof(errors) != 'undefined'){%>
                 <% for (let i = 0; i < errors.length; i++) {%>

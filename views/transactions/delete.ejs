@@ -1,0 +1,19 @@
+<%- include('../layouts/header') %>
+<body>
+    <main>
+        <h2>Are you sure you want to delete <%= transaction.categoryName %>?</h2>
+        <form action="" method="POST" onsubmit="return true;">
+            <% if(typeof(errors) != 'undefined'){%>
+                <% for (let i = 0; i < errors.length; i++) {%>
+                    <p class="validationMessage" id="loginValidation"><%= errors[i] %></p>                    
+               <% } %>                                
+            <%} %>              
+            <div class="fields-wrapper">                
+                <input class="btn btn-danger" type="submit" value="Yes" id="deleteConfirm" name="deleteConfirm">
+                <a href="javascript:history.back()">No, take be back!</a>          
+            </div>                        
+        </form>
+    </main>
+    
+</body>
+<%- include('../layouts/footer') %>

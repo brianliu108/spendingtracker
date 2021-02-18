@@ -2,8 +2,48 @@
 <body>
     <main>
         <h1>Transactions</h1>
-        <a href="/transactions/add" class="btn btn-primary">+Income</a>
-        <a href="/transactions/add" class="btn btn-primary">+Expense</a>     
+        <a href="/transactions/add/e" class="btn btn-primary">+Expense</a>
+        <a href="/transactions/add/i" class="btn btn-primary">+Income</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Transaction</th>
+                    <th>Amount</th>                    
+                </tr>
+            </thead>
+            <tbody>                
+
+                </div>
+                <% for (let i = 0; i < transactionsIncome.length; i++) {%>
+                    <tr class="income">
+
+                        <% if(transactionsIncome[i].note != '') {%>
+                            <td><%= transactionsIncome[i].note %></td>
+                        <% } else { %>
+                            <td><%= transactionsIncome[i].categoryName %></td>
+                        <% } %>
+
+                        <td><%= transactionsIncome[i].amount.toFixed(2) %></td>                        
+                        <td><a href="transactions/edit/<%= transactionsIncome[i]._id%>">Edit</a> | <a href="transactions/delete/<%= transactionsIncome[i]._id%>">Delete</a></td>
+                    </tr>                    
+               <% }  %> 
+               <% for (let i = 0; i < transactionsExpense.length; i++) {%>
+                <tr class="expense">
+
+                    <% if(transactionsExpense[i].note != '') {%>
+                        <td><%= transactionsExpense[i].note %></td>
+                    <% } else { %>
+                        <td><%= transactionsExpense[i].categoryName %></td>
+                    <% } %>
+
+                    <td><%= transactionsExpense[i].amount.toFixed(2) %></td>                        
+                    <td><a href="transactions/edit/<%= transactionsExpense[i]._id%>">Edit</a> | <a href="transactions/delete/<%= transactionsExpense[i]._id%>">Delete</a></td>
+                </tr>                    
+           <% }  %> 
+                
+            </tbody>
+        </table>   
+        
     </main>
     
 </body>

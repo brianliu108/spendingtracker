@@ -1,5 +1,5 @@
 const connection = require('../../database/dbConfig');
-const Category = require('../Category');
+const Category = require('../../models/Category');
 
 exports.validateCategory = async (req, res, next) => {
     let errors = [];
