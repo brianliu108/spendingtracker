@@ -85,7 +85,7 @@ exports.getEdit = async (req, res) => {
             email: req.session.email
         }).exec();
     } catch {
-        return res.render('transactions/transactions')
+        return res.redirect('/transactions')
     }
 
     // HTML Date format YYYY-MM-DD
@@ -106,8 +106,11 @@ exports.getEdit = async (req, res) => {
 }
 
 exports.postEdit = async (req, res) => {
-    try {
-        let transaction = new Transaction({
+    try {        
+        await Transaction.updateOne({
+            _id: mongodb.ObjectId(req.params.id),
+            email: req.session.email
+        }, {
             email: req.session.email,
             type: req.body.transactionType,
             categoryName: req.body.transactionCategory,
@@ -117,12 +120,7 @@ exports.postEdit = async (req, res) => {
             recurring: req.body.transactionRecurring,
             recurringInterval: req.body.transactionRecurringInterval,
             endDate: req.body.transactionEndDate
-        });
-        await Transaction.updateOne({
-            id: mongodb.ObjectId(req.params.id),
-            email: req.session.email
-        }, transaction);
-
+        });        
     } catch {
         return res.redirect('/transactions');
     }

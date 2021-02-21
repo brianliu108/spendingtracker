@@ -1,9 +1,45 @@
 <%- include('layouts/header') %>
 <body>
     <main>
-        <h3>Spending for the month of <%= date %></h3>
-
-           
+        <div class="topBar">
+            <a class="topBarItem topBarButton" href="/home/<%= duration %>/<%= offset - 1 %>">&#8249;</a>
+            <h3 class="topBarItem topBarText"><%= dateRange %></h3>
+            <a class="topBarItem topBarButton" href="/home/<%= duration %>/<%= offset + 1 %>">&#8250;</a>
+        </div>
+        <table class="homeTable">            
+            <tbody>
+                <tr>
+                    <td><h4>Income</h4></td>
+                    <td><h4>$<%= netIncome.toFixed(2) %></h4></td>
+                </tr>                
+                <tr>  
+                    <td><h4>Expenses</h4></td>              
+                    <td><h4>$<%= expenditure.toFixed(2) %></h4></td>
+                    <% for (let i = 0; i < expenses.length; i++) { %>                    
+                        <tr>
+                            <td><%= expenses[i].category %></td>
+                            <td><%= expenses[i].amount %></td>
+                        </tr>
+                    <% } %>
+                </tr>                
+                <tr class="balance">
+                    <td><h4>Balance</h4></td>
+                    <td><h4>
+                        <% var formatter = new Intl.NumberFormat('en-US', {
+                            style: 'currency',
+                            currency: 'USD',
+                          }); %>
+                        <%= formatter.format(netIncome - expenditure) %>
+                    </h4></td>
+                </tr>
+            </tbody>   
+        </table>
+        
+        
+            
+        
+        <a href="/transactions/add/e" class="btn btn-primary">+Expense</a>
+        <a href="/transactions/add/i" class="btn btn-primary">+Income</a>
     </main>
 </body>
 <%- include('layouts/footer') %>

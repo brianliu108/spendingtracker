@@ -73,7 +73,8 @@ exports.validateRegistration = async (req,res,next) => {
             formFields: {
                 name: req.body.name,
                 email: req.body.email
-            }
+            },
+            showLogout: false
         })
         else return next();
     }

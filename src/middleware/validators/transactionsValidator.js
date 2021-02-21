@@ -26,7 +26,7 @@ exports.validateTransaction = async (req, res, next) => {
 
         // HTML Date format YYYY-MM-DD
         date = `${format(transaction.date, 'yyyy')}-${format(transaction.date,'MM')}-${(parseInt(format(transaction.date,'d')) + 1).toString()}`
-        endDate;
+        
         if (transaction.endDate != null) {
             endDate = `${format(transaction.endDate, 'yyyy')}-${format(transaction.endDate,'MM')}-${(parseInt(format(transaction.endDate,'d')) + 1).toString()}`
         }
@@ -65,7 +65,7 @@ exports.validateTransaction = async (req, res, next) => {
     if (req.body.transactionRecurring) {
         let recurrance = req.body.transactionRecurringInterval;
 
-        if (recurrance != 'weekly' && recurrance != 'biweekly' && recurrance != 'monthly'){
+        if (recurrance != 'weekly' && recurrance != 'biweekly' && recurrance != 'monthly') {
             errors.push('Problem with Recurring Interval');      
         }
         
