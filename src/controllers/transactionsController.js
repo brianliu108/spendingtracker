@@ -31,6 +31,7 @@ exports.getTransactions = async (req, res) => {
 
 exports.getAdd = async (req, res) => {
     let categories;
+    let selectedCategory = req.params.category;
     try {
         categories = await Category.find({
             email: req.session.email
@@ -40,11 +41,12 @@ exports.getAdd = async (req, res) => {
     } catch {
         return res.redirect('/transactions');
     }
-
+        
     return res.render('transactions/add', {
         categories: categories,
         incomeChecked: 'checked',
-        type: req.params.type
+        type: req.params.type,
+        selectedCategory: selectedCategory
     });
 }
 

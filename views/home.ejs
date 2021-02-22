@@ -6,6 +6,14 @@
             <h3 class="topBarItem topBarText"><%= dateRange %></h3>
             <a class="topBarItem topBarButton" href="/home/<%= duration %>/<%= offset + 1 %>">&#8250;</a>
         </div>
+        <div class="mobileTopBar">
+            <h3 class="topBarItem topBarText"><%= dateRange %></h3>
+            <div class="buttonContainer">
+                <a class="topBarButton" href="/home/<%= duration %>/<%= offset - 1 %>">&#8249;</a>
+                <a class="topBarButton" href="/home/<%= duration %>/<%= offset + 1 %>">&#8250;</a>
+            </div>
+            
+        </div>
         <table class="homeTable">            
             <tbody>
                 <tr>

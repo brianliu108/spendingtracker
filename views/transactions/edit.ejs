@@ -20,7 +20,7 @@
 
             <div class="fields-wrapper">
                 <label for="transactionCategory">Category</label>
-                <a href="/categories/add">+Add new category</a>
+                <a href="/categories/add/<%= transaction.type %>">+Add new category</a>
                 <select class="formInput" id="transactionCategory" name="transactionCategory">
                     <% for (let i = 0; i < categories.length; i++) { %>                        
                         <option value="<%= categories[i].name %>" <% if(transaction.categoryName == categories[i].name){%> selected="selected" <%}%> ><%= categories[i].name %></option>

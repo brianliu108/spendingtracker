@@ -14,7 +14,6 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "json-web-token": "^3.2.0",
     "mongoose": "^5.11.15",
     "validator": "^13.5.2"
   },

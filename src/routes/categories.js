@@ -7,7 +7,7 @@ const { checkAuthenticated } = require('../middleware/authentication');
 router.route('/categories')
 .get(checkAuthenticated, controller.getCategories);
 
-router.route('/categories/add')
+router.route('/categories/add/:type?')
 .get(checkAuthenticated, controller.getAdd)
 .post(checkAuthenticated, validator.validateCategory , controller.postAdd);
 

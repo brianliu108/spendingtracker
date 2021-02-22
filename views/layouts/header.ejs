@@ -4,28 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spending Tracker</title>
-    <script type="text/javascript" src="js/site.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/site.js"></script>    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css" rel="stylesheet" type="text/css">
     <link href="/css/style.css" rel="stylesheet" type="text/css">
 </head>
 
+<div id="mobileNav"></div>
 <div class="headerArea">
 <nav>
     
-    <ul>
+    <ul id="menu">
         <li><a href="/">Home</a></li>
         <li><a href="/transactions">Transactions</a></li>
-        <li><a href="/categories">Categories</a></li>  
-        <%
-        if(typeof(showLogout) == 'undefined') {
-        %><p class="logout"><a class="logout" href="/logout">Logout</a></p>
+        <li><a href="/categories">Categories</a></li>          
+        <% if(typeof(showLogout) == 'undefined') { %>
+        <li><a class="logout" href="/logout">Logout</a></li>
         <%}%> 
-             
+           
     </ul>      
 </nav>
+<div class="clear"></div>   
 </div>
+
 <% if(typeof(message) != 'undefined') {%>
     <span class="message"><%= message %></span>
 <%}%>
+

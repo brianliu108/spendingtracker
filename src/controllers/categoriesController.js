@@ -23,6 +23,13 @@ exports.postAdd = async (req, res) => {
 
         await category.save();
 
+        if(req.params.type == 'i') {
+            return res.redirect(`/transactions/add/i/${req.body.categoryName}`);
+        }
+        else if(req.params.type == 'e') {
+            return res.redirect(`/transactions/add/e/${req.body.categoryName}`);
+        }
+
         return res.redirect('/categories');
     } catch (e) {        
         return res.render('categories/add', {
@@ -30,7 +37,6 @@ exports.postAdd = async (req, res) => {
         })
     }
     
-   
 };
 
 exports.getDelete = async (req, res) => {

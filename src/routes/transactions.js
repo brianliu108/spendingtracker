@@ -12,7 +12,7 @@ const {
 router.route('/transactions')
     .get(checkAuthenticated, controller.getTransactions);
 
-router.route('/transactions/add/:type?')
+router.route('/transactions/add/:type?/:category?')
     .get(checkAuthenticated, controller.getAdd)
     .post(checkAuthenticated, validator.validateTransaction, controller.postAdd);
 

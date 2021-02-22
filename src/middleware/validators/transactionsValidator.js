@@ -7,12 +7,12 @@ const {
     isBefore
 } = require('date-fns');
 
-
-exports.validateTransaction = async (req, res, next) => {    
+exports.validateTransaction = async (req, res, next) => {
     let errors = [],
         categories = [],
         transaction, endDate;
-
+    console
+    
     if (req.session.isEditing) {
         // See if transaction record exists
         try {
@@ -26,7 +26,7 @@ exports.validateTransaction = async (req, res, next) => {
 
         // HTML Date format YYYY-MM-DD
         date = `${format(transaction.date, 'yyyy')}-${format(transaction.date,'MM')}-${(parseInt(format(transaction.date,'d')) + 1).toString()}`
-        
+
         if (transaction.endDate != null) {
             endDate = `${format(transaction.endDate, 'yyyy')}-${format(transaction.endDate,'MM')}-${(parseInt(format(transaction.endDate,'d')) + 1).toString()}`
         }
@@ -66,12 +66,12 @@ exports.validateTransaction = async (req, res, next) => {
         let recurrance = req.body.transactionRecurringInterval;
 
         if (recurrance != 'weekly' && recurrance != 'biweekly' && recurrance != 'monthly') {
-            errors.push('Problem with Recurring Interval');      
+            errors.push('Problem with Recurring Interval');
         }
-        
+
         // end date
-        let endDate = req.body.transactionEndDate;  
-              
+        let endDate = req.body.transactionEndDate;
+
         if (!validator.isDate(endDate) && endDate != '') errors.push('Problem with end date');
         else if (Date.parse(endDate) < Date.now()) errors.push('End date must be in the future');
     } else {
@@ -80,14 +80,26 @@ exports.validateTransaction = async (req, res, next) => {
         req.body.transactionEndDate = null;
     }
 
-    req.session.isEditing = false;
+    
     if (errors.length == 0) return next();
 
-    return res.render('transactions/edit', {
-        transaction: transaction,
-        categories: categories,        
-        endDate: endDate,
-        errors: errors
-    });
+    console.log(transaction);
+
+    if(req.session.isEditing) {
+        req.session.isEditing = false;
+        return res.render('transactions/edit', {
+            transaction: transaction,
+            categories: categories,
+            endDate: endDate,
+            errors: errors
+        });
+    }
+    else {
+        return res.render('transactions/add', {
+            errors: errors,
+            categories: categories
+        })
+    }
+    
 
 };

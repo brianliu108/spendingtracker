@@ -28,6 +28,10 @@ nav {
     padding-bottom: .5%;
 }
 
+#mobileNav {
+    display: none;
+}
+
 nav ul {
     list-style-type: none;
     text-decoration: none;
@@ -37,11 +41,9 @@ nav ul {
 }
 
 nav ul li {
-    /* border: 1px solid black;    */
     padding: 1%;
     display: inline;
-    /* border-radius: 10px; */
-    /* background-color: #364291; */
+    background-color: #364291;
 }
 
 nav ul li a {
@@ -56,6 +58,7 @@ nav ul li a:hover {
 .logout {
     float: right;
     color: white;
+    font-weight: 400
 }
 
 .logout a {
@@ -150,10 +153,10 @@ table {
 }
 
 .clear {
-    float: none;
+    clear: both;
 }
 
-.topBar{
+.topBar {
     text-align: center;
 }
 
@@ -161,7 +164,7 @@ table {
     display: inline-block;
 }
 
-.topBarText{
+.topBarText {
     text-align: center;
     width: 250px;
 }
@@ -173,6 +176,10 @@ table {
     background-color: #f1f1f1;
     color: black;
     margin: 0px 10px;
+}
+
+.mobileTopBar {
+    display: none;
 }
 
 .topBarButton:hover {
@@ -194,5 +201,72 @@ table {
         box-shadow: none;
         border-radius: 0%;
         background-color: inherit;
+    }
+
+    .loginForm {
+        width: 100%;
+    }
+
+    .loginInput {
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width: 705px) {
+    #menu {
+        display: none;
+    }
+
+    #mobileNav {
+        display: block;
+    }
+
+    .logout {
+        float: none;
+        color: white;
+        font-weight: 400
+    }
+
+    .headerArea {
+        display: none;
+    }
+
+    .slicknav_menu {
+        background-color: #364291;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .mobileTopBar {
+        display: block;
+    }
+
+    .topBar {
+        display: none;
+    }
+
+    .topBarItem {
+        display: block;
+    }
+
+    .topBarText {
+        text-align: center;
+        width: 250px;
+        margin: 0 auto;
+    }
+    
+    .topBarButton {
+        padding: 8px 16px;
+    }
+
+    .buttonContainer {
+        width: 142px;
+        margin: 2% auto;
+    }
+
+    .nestContainer {
+        width: 250px;
+        margin: 0 auto;
     }
 }
