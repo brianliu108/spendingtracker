@@ -8,20 +8,21 @@ const validator = require('../middleware/validators/transactionsValidator');
 const {
     signifyEdit
 } = require('../middleware/edit');
+const { sendDiscordMsg } = require('../middleware/discord');
 
 router.route('/transactions')
-    .get(checkAuthenticated, controller.getTransactions);
+    .get(checkAuthenticated, sendDiscordMsg, controller.getTransactions);
 
 router.route('/transactions/add/:type?/:category?')
-    .get(checkAuthenticated, controller.getAdd)
-    .post(checkAuthenticated, validator.validateTransaction, controller.postAdd);
+    .get(checkAuthenticated, sendDiscordMsg, controller.getAdd)
+    .post(checkAuthenticated, validator.validateTransaction, sendDiscordMsg, controller.postAdd);
 
 router.route('/transactions/edit/:id')
     .get(checkAuthenticated, controller.getEdit)
-    .post(checkAuthenticated, signifyEdit, validator.validateTransaction, controller.postEdit);
+    .post(checkAuthenticated, signifyEdit, validator.validateTransaction, sendDiscordMsg, controller.postEdit);
 
 router.route('/transactions/delete/:id')
-    .get(checkAuthenticated, controller.getDelete)
-    .post(checkAuthenticated, controller.postDelete);
+    .get(checkAuthenticated, sendDiscordMsg, controller.getDelete)
+    .post(checkAuthenticated, sendDiscordMsg, controller.postDelete);
 
 module.exports = router;

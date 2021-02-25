@@ -159,7 +159,7 @@ exports.getLogin = (req, res) => {
         showLogout: false
     })
 
-    res.render('login', pageData);
+    return res.render('login', pageData);
 }
 
 exports.postLogin = (req, res) => {
@@ -190,7 +190,6 @@ exports.postRegister = async (req, res) => {
             }
         });
     }
-
 
     res.redirect('/home');
 };
