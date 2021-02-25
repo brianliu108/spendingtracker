@@ -31,7 +31,8 @@ exports.postAdd = async (req, res) => {
         }
 
         return res.redirect('/categories');
-    } catch (e) {        
+    } catch (e) {   
+        console.log(e);
         return res.render('categories/add', {
             errors: ['Error adding. Please try again']
         })

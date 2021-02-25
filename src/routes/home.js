@@ -30,4 +30,7 @@ router.route('/logout')
 router.route('/demo')
 .get(checkNotAuthenticated, controller.getDemo);
 
+router.route('/about')
+.get(controller.getAbout);
+
 module.exports = router;

@@ -200,3 +200,11 @@ exports.getLogout = (req, res) => {
 
     res.redirect('/login');
 }
+
+exports.getAbout = (req, res) => {
+    let pageData = {};
+
+    return res.render('about', {
+        showLogout: false
+    });
+}

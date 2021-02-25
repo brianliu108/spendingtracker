@@ -24,7 +24,7 @@
                             <td><%= transactionsIncome[i].categoryName %></td>
                         <% } %>
 
-                        <td><%= transactionsIncome[i].amount.toFixed(2) %></td>                        
+                        <td>$<%= transactionsIncome[i].amount.toFixed(2) %></td>                        
                         <td><a href="transactions/edit/<%= transactionsIncome[i]._id%>">Edit</a> | <a href="transactions/delete/<%= transactionsIncome[i]._id%>">Delete</a></td>
                     </tr>                    
                <% }  %> 
@@ -37,7 +37,7 @@
                         <td><%= transactionsExpense[i].categoryName %></td>
                     <% } %>
 
-                    <td><%= transactionsExpense[i].amount.toFixed(2) %></td>                        
+                    <td>$<%= transactionsExpense[i].amount.toFixed(2) %></td>                        
                     <td><a href="transactions/edit/<%= transactionsExpense[i]._id%>">Edit</a> | <a href="transactions/delete/<%= transactionsExpense[i]._id%>">Delete</a></td>
                 </tr>                    
            <% }  %> 

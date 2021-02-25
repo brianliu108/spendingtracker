@@ -11,9 +11,9 @@ exports.validateTransaction = async (req, res, next) => {
     let errors = [],
         categories = [],
         transaction, endDate;
-    console
-    
-    if (req.session.isEditing) {
+    console.log(req.body);
+    console.log(req.body.transactionCategory);
+    if (req.session.isEditing == true) {
         // See if transaction record exists
         try {
             transaction = await Transaction.findOne({
@@ -81,11 +81,14 @@ exports.validateTransaction = async (req, res, next) => {
     }
 
     
-    if (errors.length == 0) return next();
+    if (errors.length == 0){
+        req.session.isEditing = false;
+        return next();
+    } 
 
     console.log(transaction);
 
-    if(req.session.isEditing) {
+    if(req.session.isEditing == true) {        
         req.session.isEditing = false;
         return res.render('transactions/edit', {
             transaction: transaction,
@@ -97,7 +100,8 @@ exports.validateTransaction = async (req, res, next) => {
     else {
         return res.render('transactions/add', {
             errors: errors,
-            categories: categories
+            categories: categories,
+            type: req.params.type
         })
     }
     
