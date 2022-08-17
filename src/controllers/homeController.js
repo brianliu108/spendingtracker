@@ -31,15 +31,13 @@ exports.getHome = async (req, res) => {
             break;
     }
     // Get offset parameter or set to 0
-    switch (typeof (req.params.offset)) {
-        case 'string':
-            req.session.offset = parseInt(req.params.offset)
-            if (isNaN(req.session.offset)) req.session.offset = 0;
-            break;
-        default:
-            req.session.offset = 0;
-            break;
-    }
+    if (req.params.offset) {       
+        req.session.offset = parseInt(req.params.offset)
+        if (isNaN(req.session.offset)) req.session.offset = 0;
+    }    
+    else if (!req.session.offset)
+        req.session.offset = 0;
+    
     req.session.dateRange = getDateRange(req.session.duration, req.session.offset);
     [start, end] = getStartAndEndDates(req.session.duration, req.session.offset);
     // console.log(start, end);
@@ -67,10 +65,10 @@ exports.getHome = async (req, res) => {
     for (let i = 0; i < transactions.length; i++) {
         if (transactions[i].type == 'income') {
             income.push(transactions[i]);
-            netIncome = netIncome + transactions[i].amount;
+            netIncome += transactions[i].amount;
         } else {
             expenses.push(transactions[i]);
-            expenditure = expenditure + transactions[i].amount;
+            expenditure += transactions[i].amount;
         }
     }
 
